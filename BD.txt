@@ -1,0 +1,49 @@
+create database divisimabd
+use divisimabd;
+create table brand(
+idbrand int auto_increment primary key,
+name varchar(50)
+);
+INSERT INTO `brand` VALUES (1,'Abercrombie & Fitch '),(2,'Asos'),(3,'Bershka'),(4,'Missguided'),(5,'Zara');
+CREATE TABLE categoria (
+  idcategoria int NOT NULL AUTO_INCREMENT primary key,
+  nombreC varchar(45),
+  estado int,
+  parentid int
+  );
+  INSERT INTO `categoria` VALUES (1,'Woman wear',1,0),(2,'Man Wear',1,0),(3,'Children',1,0),(4,'Bags & Purses',1,0),(5,'Eyewear',1,0),(6,'Footwear',1,0),(7,'Midi Dresses',1,1),(8,'Maxi Dresses',1,1),(9,'Prom Dresses',1,1),(10,'Little Black Dresses',1,1),(11,'Mini Dresses',1,1),(12,'Midi Dresses',1,2),(13,'Maxi Dresses',1,2),(14,'Midi Dresses',1,2);
+  CREATE TABLE `color` (
+  idcolor int NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  nombreColor varchar(80)
+  );
+  INSERT INTO `color` VALUES (1,'gris'),(2,'acero'),(3,'azul'),(4,'verde'),(5,'purpura'),(6,'celeste');
+  CREATE TABLE `product` (
+  `idproduct` int(11) NOT NULL PRIMARY KEY,
+  `nombreP` varchar(60) NOT NULL,
+  `precio` decimal(18,2) NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `descripcion` varchar(500),
+  `urlimage` varchar(100),
+  `idcategoria` int NOT NULL,
+  idbrand int  NOT NULL,
+  idcolor int NOT NULL,
+  size varchar(5),
+  KEY `fk_product_brand` (`idbrand`),
+  KEY `fk_product_color` (`idcolor`),
+  KEY `fk_product_categoria` (`idcategoria`),
+  CONSTRAINT `fk_product_brand` FOREIGN KEY (`idbrand`) REFERENCES `brand` (`idbrand`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_product_category` FOREIGN KEY (`idcategoria`) REFERENCES `categoria` (`idcategoria`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_product_color` FOREIGN KEY (`idcolor`) REFERENCES `color` (`idcolor`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  );
+  INSERT INTO `product` VALUES (1,'Black and White Stripes Dress',35.00,25,'lwkflwk','6.jpg',1,3,1,'L'),
+  (2,'Flamboyant Pink Top',35.00,35,'jkajska','7.jpg',1,5,3,'S'),
+  (3,'Flamboyant Pink Top',35.00,25,'ajndkjsdnj','8.jpg',1,2,1,'XL'),
+  (4,'Black and White Stripes Dress',35.00,25,'mckmk','10.jpg',1,3,5,'XXL'),
+  (5,'Flamboyant Pink Top',35.00,35,'skkemkef','11.jpg',1,1,1,'M'),
+  (6,'Flamboyant Pink Top',35.00,25,'lkmqkmq','12.jpg',1,5,6,'XS'),
+  (7,'Flamboyant Pink Top',35.00,35,'skkewrg','5.jpg',1,3,5,'XL'),
+  (8,'Flamboyant Pink Top',35.00,25,'fmkemfke','9.jpg',1,4,2,'S'),
+  (9,'Flamboyant Pink Top',35.00,25,'kekfe','1.jpg',1,2,1,'XXL'),
+  (10,'Black and White Stripes Dress',35.00,25,'lkvmwkmvw','2.jpg',1,4,2,'XL'),
+  (11,'Flamboyant Pink Top',35.00,35,'kwjnenfj','3.jpg',1,5,4,'M'),
+  (12,'Flamboyant Pink Top',35.00,25,'wkwkmefk','4.jpg',1,4,6,'S');
